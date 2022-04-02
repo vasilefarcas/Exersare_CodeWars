@@ -56,8 +56,85 @@ namespace Exersare_CodeWars
 
             // Console.WriteLine(sumTwoSmallestNumbers(new int[] { 5, 8, 12, 19, 22 }));
 
+            // Console.WriteLine(DescendingOrder2(42145));
+
+            // Console.WriteLine(AlphabetWar("*z"));
+
+            Console.WriteLine(comp2(new int[] { 121, 144, 19, 161, 19, 144, 19, 11 }, new int[] { 11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19 }));
         }
 
+
+
+        public static bool comp2(int[] a, int[] b)
+        {
+            if(a==null || b==null)
+                return false;
+            Array.Sort(a);
+            Array.Sort(b);
+            for (int i = 0; i < a.Length; i++)
+                if (a[i] * a[i] != b[i])
+                    return false;
+            return true;
+        }
+
+
+        public static string AlphabetWar(string fight)
+        {
+            char[] chars = fight.ToCharArray();
+            if (fight[0] == '*')
+                chars[1] = '-';
+            if (fight[fight.Length - 1] == '*')
+                chars[fight.Length - 2] = '-';
+
+            for (int i = 1; i < fight.Length - 1; i++)
+            {
+                if (fight[i] == '*')
+                {
+                    chars[i - 1] = '-';
+                    chars[i + 1] = '-';
+                }
+            }
+            int s = 0, d = 0;
+            for (int i = 0; i < chars.Length; i++)
+            {
+                switch (chars[i])
+                {
+                    case 'w':
+                        s += 4;
+                        break;
+                    case 'p':
+                        s += 3;
+                        break;
+                    case 'b':
+                        s += 2;
+                        break;
+                    case 's':
+                        s += 1;
+                        break;
+                }
+                switch (chars[i])
+                {
+                    case 'm':
+                        d += 4;
+                        break;
+                    case 'q':
+                        d += 3;
+                        break;
+                    case 'd':
+                        d += 2;
+                        break;
+                    case 'z':
+                        d += 1;
+                        break;
+                }
+            }
+            if (s < d)
+                return "Right side wins!";
+            else
+                if (s > d)
+                return "Left side wins!";
+            return "Let's fight again!";
+        }
 
         public static int DescendingOrder2(int num)
         {
@@ -69,13 +146,8 @@ namespace Exersare_CodeWars
                 num /= 10;
             }
             Array.Sort(v);
-            for (int i = l-1; i > 0; i--)
-            {
-                num *= 10 + v[i];
-
-            }
-
-
+            for (int i = l - 1; i >= 0; i--)
+                num = num * 10 + v[i];
             return num;
         }
 
@@ -349,7 +421,7 @@ namespace Exersare_CodeWars
         static void DescendingOrder(int n)
         {
             int[] vector = new int[20];
-            int numar = 0, i = 0;
+            int i = 0;
             for (; n > 0; n /= 10, i++)
             {
                 vector[i] = n % 10;
