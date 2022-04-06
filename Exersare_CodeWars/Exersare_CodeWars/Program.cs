@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 namespace Exersare_CodeWars
 {
     class Program
@@ -60,14 +61,72 @@ namespace Exersare_CodeWars
 
             // Console.WriteLine(AlphabetWar("*z"));
 
-            Console.WriteLine(comp2(new int[] { 121, 144, 19, 161, 19, 144, 19, 11 }, new int[] { 11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19 }));
+            // Console.WriteLine(comp2(new int[] { 121, 144, 19, 161, 19, 144, 19, 11 }, new int[] { 11 * 11, 121 * 121, 144 * 144, 19 * 19, 161 * 161, 19 * 19, 144 * 144, 19 * 19 }));
+
+            // List<int[]> peopleList = new List<int[]>() { new[] { 10, 0 }, new[] { 3, 5 }, new[] { 5, 8 } };
+            // Console.WriteLine(Number(peopleList));
+
+            Console.WriteLine(DuplicateCount("Indivisibilities"));
+
+
         }
 
 
 
+
+        public static string RevRot(string strng, int sz)
+        {
+            string stri=string.Empty;
+            for (int i = 0; i < strng.Length; i = i + sz)
+            {
+                stri = stri + strng[i] + strng[i + 1] + strng[i + 2] + strng[i + 3] + strng[i + 4] + strng[i + 5];
+            }
+            return stri;
+        }
+
+        public static int DuplicateCount(string str)
+        {
+            str = str.ToLower();
+            int count = 0;
+            char[] s = new char[str.Length];
+            for (int i = 0; i < str.Length; i++)
+            {
+                s[i] = str[i];
+            }
+            int rez = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (s[i] != ' ')
+                {
+                    count = 0;
+                    for (int j = i + 1; j < str.Length; j++)
+                    {
+                        if (str[i] == s[j])
+                        {
+                            count++;
+                            s[j] = ' ';
+                        }
+                    }
+                    if (count != 0)
+                        rez++;
+                }
+            }
+            return rez;
+        }
+
+        public static int Number(List<int[]> peopleListInOut)
+        {
+            int nr = 0;
+            foreach (int[] item in peopleListInOut)
+            {
+                nr = nr + item[0] - item[1];
+            }
+            return nr;
+        }
+
         public static bool comp2(int[] a, int[] b)
         {
-            if(a==null || b==null)
+            if (a == null || b == null)
                 return false;
             Array.Sort(a);
             Array.Sort(b);
@@ -269,19 +328,19 @@ namespace Exersare_CodeWars
         }
 
         public static bool ArrayMadness(int[] a, int[] b) => a.Sum(t => Math.Pow(t, 2)) > b.Sum(s => Math.Pow(s, 3));
-        /*
+
         public static string[] TowerBuilder(int nFloors)
         {
-            string[] result = new String[10];
-            int i = 0,j;
-            for(i;i<=nFloors;i++)
+            string[] result = new String[nFloors];
+            int i = 0, j;
+            for (; i <= nFloors; i++)
             {
                 for (j = 1; j < nFloors; j++)
-                result[i] += ' ';
-            }    
+                    result[i] += ' ';
+            }
             return new string[0];
         }
-        */
+
         static bool comp(int[] a, int[] b)
         {
             int i;
